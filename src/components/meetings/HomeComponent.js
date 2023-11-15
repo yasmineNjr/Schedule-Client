@@ -9,7 +9,8 @@ import Button from '../Layouts/Button';
 import Input from '../Layouts/Input';
 
 // const socket = io.connect("http://localhost:3001");
-const socket = io.connect("https://schedule-a-meeting-server-p1l0mt0p4-yasminenjr.vercel.app/");
+// const socket = io.connect("https://schedule-a-meeting-server-p1l0mt0p4-yasminenjr.vercel.app/");
+const socket = io.connect("https://schedule-a-meeting-server.onrender.com");
 
 function HomeComponent() {
 
