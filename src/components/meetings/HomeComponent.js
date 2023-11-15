@@ -28,7 +28,7 @@ function HomeComponent() {
 		  setMessageReceived(data.message);
 		  value.setGlobalMessage(data.message);
 		  //alert(data.message);
-		  //console.log(data.message);
+		  console.log(data.message);
 		});
 		socket.on("receive_final", (data) => {
 			//alert(data.finalMessage);
@@ -56,7 +56,8 @@ function HomeComponent() {
 				}
 			}
 		}else{
-			alert('no message');
+			//alert('no message');
+			console.log('no message');
 		}
 	  }
 	
