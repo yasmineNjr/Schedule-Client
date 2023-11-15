@@ -57,7 +57,7 @@ function NewMeetingComponent() {
 		//alert(message);
 		//socket.emit("send_message", { message, code });
 		socket.emit("send_message", { message });
-		console.log(x);
+		console.log(message);
 	  };
 	const sendFinalMessage = () => {
 		socket.emit("send_final", { finalMessage });
