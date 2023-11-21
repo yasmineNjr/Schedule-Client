@@ -7,6 +7,19 @@ import { Calendar, dateFnsLocalizer } from "react-big-calendar";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+
+// import TimePicker from 'react-time-picker';
+// import 'react-time-picker/dist/TimePicker.css';
+// import 'react-clock/dist/Clock.css';
+
+import Datetime from 'react-datetime';
+import 'react-datetime/css/react-datetime.css';
+
+import DateTimePicker from 'react-datetime-picker';
+import 'react-datetime-picker/dist/DateTimePicker.css';
+import 'react-calendar/dist/Calendar.css';
+import 'react-clock/dist/Clock.css';
+
 import io from "socket.io-client";
 import MeetingList from "../Layouts/MeetingsList";
 import EventComponent from "../Layouts/EventComponent";
@@ -16,7 +29,7 @@ import Input from "../Layouts/Input";
 import Button from "../Layouts/Button";
 import addCalendarEvent from '../../GoogleCalendar';
 
-// const socket = io.connect("http://localhost:3001");
+//const socket = io.connect("http://localhost:3001");
 // const socket = io.connect("https://schedule-a-meeting-server-p1l0mt0p4-yasminenjr.vercel.app/");
 const socket = io.connect("https://schedule-a-meeting-server.onrender.com");
 
@@ -33,7 +46,7 @@ const locales = {
   });
 
 function NewMeetingComponent() {
-
+	
 	const value = useContext(AppContext);
     let { globalMessage, globalName } = value.state;
 	
@@ -44,7 +57,19 @@ function NewMeetingComponent() {
 	const [finalMessage, setFinalMessage] = useState([]);
 	const [persons, setPersons] = useState([]);
 	const [person, setPerson] = useState({ title: ""});
-
+	// const [startTime, setStartTime] = useState(new Date());
+	// const [endTime, setEndTime] = useState('10:00');
+	// const onChangeStartTime = (value) => {
+    //     setStartTime(value);
+    //   };
+	// const onChangeEndTime = (value) => {
+    //     setEndTime(value);
+    //   };
+	// const [getDate, setGetDate] = useState(new Date());
+	// const handleChange = (value) => {
+    //     setGetDate(value);
+    //   };
+	
 	const sendMessage = () => {
 		let c = generateCode();
 		setCode(c);
@@ -104,6 +129,7 @@ function NewMeetingComponent() {
 		all.push(newSuggustion);
 		setAllSuggestions(all);
 		setMessage(all);
+		console.log(message);
 	}
 	const handleSelected = (meet) => {
 		let lst = [];
@@ -144,11 +170,49 @@ function NewMeetingComponent() {
 					<hr style={{ color: 'black', width: '98%'}}/>
 					
 					<Input type="text" placeholder="Suggestion..."  value={newSuggustion.title} onChange={(e) => setNewSuggestion({ ...newSuggustion, title: e.target.value })} />
-					<div style={{marginBottom: '0.25rem'}} >
+					{/* <div style={{marginBottom: '0.25rem'}} >
 						<DatePicker placeholderText="Start Date..." selected={newSuggustion.start} onChange={(start) => setNewSuggestion({ ...newSuggustion, start })} />
 					</div>
 					<div style={{marginBottom: '0.25rem'}} >
 						<DatePicker placeholderText="End Date..." style={{margin: '1rem', backgroundColor: 'red'}} selected={newSuggustion.end} onChange={(end) => setNewSuggestion({ ...newSuggustion, end })} />
+					</div> */}
+					{/* <div style={{marginBottom: '0.25rem'}} >
+						<DateTimePicker />
+					</div> */}
+					{/* <div style={{marginBottom: '0.25rem'}} >
+						 <Datetime
+							onChange={onChangeStartTime}
+							value={startTime}
+							dateFormat={false}
+							inputProps={{ placeholder: 'Start time' }}
+						/>
+					</div>
+					<div style={{marginBottom: '0.25rem'}} >
+						 <Datetime
+							onChange={onChangeEndTime}
+							value={endTime}
+							dateFormat={false}
+							inputProps={{ placeholder: 'End time' }}
+						/>
+					</div> */}
+					<div style={{marginBottom: '0.25rem'}} >
+						 <DateTimePicker
+						 	placeholderText="Start Date..."
+							format={"yyyy-MM-dd hh:mm a"}
+							onChange={(start) => setNewSuggestion({ ...newSuggustion, start })}
+							value={newSuggustion.start}
+							width={250}
+						/>
+					</div>
+					<div style={{marginBottom: '0.25rem'}} >
+						 <DateTimePicker
+						 	placeholderText="End Date..."
+							format={"yyyy-MM-dd hh:mm a"}
+							onChange={(end) => setNewSuggestion({ ...newSuggustion, end })}
+							value={newSuggustion.end}
+							width={250}
+							
+						/>
 					</div>
 					<Button title='Add Suggestion' color='#D4AC0D' onClick={handleAddSuggestion} />
 					<hr style={{ color: 'black', width: '98%'}}/>
