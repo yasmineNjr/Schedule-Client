@@ -1,27 +1,23 @@
 import { useState } from "react";
 import MeetingItem from "./MeetingItem";
+import classes from './MeetingList.module.css';
 
 function MeetingList(props) {
-
-    const [lst, setLst] = useState(props.meetings);
+    
+    const [usersList, setUsersList] = useState(props.users);
 
     return(
-            lst.length === 0 
+        usersList.length === 0 
             ?
             <div></div>
             :
-            <ul style={{listStyle: 'none', padding: '0.5rem', marginTop: '0.3rem', overflow: 'auto', maxHeight: '5rem' , 
-                        backgroundColor: '#DAF7A6', borderRadius: '6px', boxShadow: '0 2px 8px rgba(0, 0, 0, 0.2)',
-                        }}>
+            <ul className={classes.ul}>
                 {
-                    lst.map( meet => (
-                        <MeetingItem key={meet.title} meet={meet} setLst={setLst} lst={lst}/>
-                    )
-    
-                    )
+                    usersList.map( user => (
+                        <MeetingItem key={user.title} user={user} setLst={setUsersList} lst={usersList}/>
+                    ))
                 }
             </ul>
-       
     )
 }
 

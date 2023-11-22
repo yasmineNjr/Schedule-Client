@@ -1,6 +1,5 @@
 import classes from './MainNavigation.module.css';
 import {Link} from 'react-router-dom';
-// import Logo from './logo';
 
 function MainNavigation(){
     return <header className={classes.header}>

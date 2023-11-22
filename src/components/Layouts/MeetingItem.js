@@ -1,18 +1,20 @@
 import {AiFillDelete} from 'react-icons/ai';
+import classes from './MeetingItem.module.css';
 function MeetingItem(props) {
     
-    function deleteHandler(){
+    function onClickHandler(){
         
-        const meetLst = props.lst.filter(l => l !== props.meet);
-        props.setLst(meetLst);
+        const usersLst = props.lst.filter(u => u == props.user);
+        props.setLst(usersLst);
     }
 
     return(
-        <li style={{}}>
-            <div style={{display: 'flex', flexDirection: 'row', alignItems: 'center', height: '2rem'}}>
-                <h5 style={{width: '90%', padding: '0.5rem', color: '#21618C'}}>{props.meet.title}</h5>
-                <AiFillDelete style={{padding: '0.5rem', color: 'red'}} onClick={deleteHandler}/>
+        <li>
+            <div className={classes.maindiv}>
+                <h5 className={classes.h5}>{props.user.title}</h5>
+                <AiFillDelete style={{padding: '0.5rem', color: '#D35400'}} onClick={onClickHandler}/>
             </div>
+            <hr style={{width: '100%'}} />
         </li>
     )
 }

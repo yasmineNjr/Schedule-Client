@@ -1,0 +1,9 @@
+.maindiv {
+    display: flex;
+    flex-direction: row; 
+    height: 2rem ; 
+    margin: 0;
+    padding: 0; 
+    align-items: center;
+    justify-content: center;
+  }

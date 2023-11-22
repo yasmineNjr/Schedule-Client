@@ -1,19 +1,15 @@
-import format from "date-fns/format";
-import getDay from "date-fns/getDay";
-import parse from "date-fns/parse";
-import startOfWeek from "date-fns/startOfWeek";
 import React, { useState, useEffect } from "react";
-import { Calendar, dateFnsLocalizer } from "react-big-calendar";
 import "react-big-calendar/lib/css/react-big-calendar.css";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
+import classes from './NewMeetingComponent.module.css';
+// import DatePicker from "react-datepicker";
+// import "react-datepicker/dist/react-datepicker.css";
 
 // import TimePicker from 'react-time-picker';
 // import 'react-time-picker/dist/TimePicker.css';
 // import 'react-clock/dist/Clock.css';
 
-import Datetime from 'react-datetime';
-import 'react-datetime/css/react-datetime.css';
+// import Datetime from 'react-datetime';
+// import 'react-datetime/css/react-datetime.css';
 
 import DateTimePicker from 'react-datetime-picker';
 import 'react-datetime-picker/dist/DateTimePicker.css';
@@ -22,28 +18,15 @@ import 'react-clock/dist/Clock.css';
 
 import io from "socket.io-client";
 import MeetingList from "../Layouts/MeetingsList";
-import EventComponent from "../Layouts/EventComponent";
 import { useContext } from "react";
 import AppContext from '../../AppContext';
 import Input from "../Layouts/Input";
 import Button from "../Layouts/Button";
 import addCalendarEvent from '../../GoogleCalendar';
+import CalendarComponent from "../Layouts/CalendarComponent";
 
-//const socket = io.connect("http://localhost:3001");
-// const socket = io.connect("https://schedule-a-meeting-server-p1l0mt0p4-yasminenjr.vercel.app/");
+// const socket = io.connect("http://localhost:3001");
 const socket = io.connect("https://schedule-a-meeting-server.onrender.com");
-
-const locales = {
-	"en-US": require("date-fns/locale/en-US"),
-  };
-  
-  const localizer = dateFnsLocalizer({
-	format,
-	parse,
-	startOfWeek,
-	getDay,
-	locales,
-  });
 
 function NewMeetingComponent() {
 	
@@ -79,7 +62,6 @@ function NewMeetingComponent() {
 			message[i].persons = persons;
 			message[i].owner = globalName;
 		}
-		//alert(message);
 		//socket.emit("send_message", { message, code });
 		socket.emit("send_message", { message });
 		console.log(message);
@@ -88,33 +70,24 @@ function NewMeetingComponent() {
 		socket.emit("send_final", { finalMessage });
 		value.setFinalMessage(finalMessage);
 		localStorage.setItem('finalMessage',JSON.stringify(finalMessage));
-		const x = JSON.parse(localStorage.getItem("finalMessage") || "[]");
-		// console.log(x);
-		// alert(finalMessage);
 	};
 	const addPersonHandler = (event) => {
 		event.preventDefault();
 		let p = persons;
 		p.push(person);
 		setPersons(p);
-		//console.log(persons);
 	}
 	  useEffect(() => {
 		socket.on("receive_message", (data) => {
-		  //setMessageReceived(data.message);
 		  setMessage(data.message);
-		  //alert(data.message);
-		  //console.log(data.message);
 		  value.setGlobalMessage(data.message);
 		});
 		socket.on("receive_final", (data) => {
-			//alert(data.finalMessage);
 			value.setFinalMessage(data.finalMessage);
 		  });
-	  }, [socket]);
+	  }, [socket, value]);
 	
     function handleAddSuggestion() {
-      
 		const startDate = new Date (newSuggustion.start);
 		const endDate = new Date (newSuggustion.end);
 		if( (startDate > endDate) || 
@@ -149,25 +122,25 @@ function NewMeetingComponent() {
 	}
 	function googleCalendarHandler() {
 		addCalendarEvent('2023-06-28T09:00:00-07:00', 'address', 'clientName');
+		
 	}
 	return(  
 		<div>
 		{
 			globalName === '' || globalName === null
 			?
-			<div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', height: '10rem'}}>
-				<strong style={{color: '#1B4F72', fontSize: '1.2rem'}}>You have to log in</strong>
+			<div className={classes.logindiv}>
+				<strong className={classes.strong}>You are not logged in</strong>
 			</div>
 			:
-			<div style={{ backgroundColor: '#FBFCFC', display: 'flex', flexDirection: 'row', padding: '1rem'}}>
-				<div style={{ display: 'flex', flexDirection: 'column', width: '30%', marginLeft: '0.5rem', marginRight: '0.5rem', overflow: 'auto'}}>
-					<strong style={{color: '#1B4F72', fontSize: '1.2rem'}}>Plan a Meeting</strong>
-					<hr style={{ color: 'black'}}/>
+			<div className={classes.maindiv}>
+				<div className={classes.entriesdiv}>
+					<strong className={classes.strong}>Meeting Information</strong>
+					<hr/>
 					
-					{/* <input   type="text" placeholder="Title..."  value={newSuggustion.mainTitle} onChange={(e) => setNewSuggestion({ ...newSuggustion, mainTitle: e.target.value })} /> */}
 					<Input type="text" placeholder="Title..." value={newSuggustion.mainTitle} onChange={(e) => setNewSuggestion({ ...newSuggustion, mainTitle: e.target.value })}/>
 					<Input type="description" placeholder="Description..."  value={newSuggustion.description} onChange={(e) => setNewSuggestion({ ...newSuggustion, description: e.target.value })} />
-					<hr style={{ color: 'black', width: '98%'}}/>
+					<hr className={classes.hr}/>
 					
 					<Input type="text" placeholder="Suggestion..."  value={newSuggustion.title} onChange={(e) => setNewSuggestion({ ...newSuggustion, title: e.target.value })} />
 					{/* <div style={{marginBottom: '0.25rem'}} >
@@ -195,7 +168,7 @@ function NewMeetingComponent() {
 							inputProps={{ placeholder: 'End time' }}
 						/>
 					</div> */}
-					<div style={{marginBottom: '0.25rem'}} >
+					<div className={classes.pickerdiv} >
 						 <DateTimePicker
 						 	placeholderText="Start Date..."
 							format={"yyyy-MM-dd hh:mm a"}
@@ -204,7 +177,7 @@ function NewMeetingComponent() {
 							width={250}
 						/>
 					</div>
-					<div style={{marginBottom: '0.25rem'}} >
+					<div className={classes.pickerdiv} >
 						 <DateTimePicker
 						 	placeholderText="End Date..."
 							format={"yyyy-MM-dd hh:mm a"}
@@ -215,31 +188,22 @@ function NewMeetingComponent() {
 						/>
 					</div>
 					<Button title='Add Suggestion' color='#D4AC0D' onClick={handleAddSuggestion} />
-					<hr style={{ color: 'black', width: '98%'}}/>
+					<hr className={classes.hr}/>
 
 					<Input type="text" placeholder="Person..." value={person.title} onChange={(e) => {e.preventDefault(); setPerson({title: e.target.value });}}/>
 					<Button title='Add Person' color='#D4AC0D' onClick={addPersonHandler} />
-					<MeetingList meetings={persons}/>
-					<hr style={{ color: 'black', width: '98%'}}/>
+					<MeetingList users={persons}/>
+					<hr className={classes.hr}/>
 
 					<Input type="text" placeholder="Code..." readonly="readonly" value={code}/>
 					<Button title='Generate Code & Send' color='#512E5F' onClick={sendMessage} />
-					<hr style={{ color: 'black', width: '98%'}}/>
+					<hr className={classes.hr}/>
 
 					<Button title='Determine Final Date' color='#D35400' onClick={sendFinalMessage}/>
 
-					{/* <Button title='Google Calendar' color='#D35400' onClick={googleCalendarHandler}/> */}
+					<Button title='Google Calendar' color='#D35400' onClick={googleCalendarHandler}/>
 				</div>
-				<Calendar  
-					localizer={localizer} 
-					events={message} 
-					startAccessor="start" 
-					endAccessor="end" 
-					onSelectEvent={handleSelected}
-					style={{ height: 500, backgroundColor: 'white', width: '70%' }} 
-					components={{
-						event: EventComponent
-					}}/>
+					<CalendarComponent events={message} onSelectEvent={handleSelected} source='new'/>
 			</div> 
 		}
 		</div>
