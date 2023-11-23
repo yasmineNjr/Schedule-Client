@@ -4,17 +4,17 @@ import classes from './MeetingList.module.css';
 
 function MeetingList(props) {
     
-    const [usersList, setUsersList] = useState(props.users);
+    //const [usersList, setUsersList] = useState(props.users);
 
     return(
-        usersList.length === 0 
+        props.usersList.length === 0 
             ?
             <div></div>
             :
             <ul className={classes.ul}>
                 {
-                    usersList.map( user => (
-                        <MeetingItem key={user.title} user={user} setLst={setUsersList} lst={usersList}/>
+                    props.usersList.map( user => (
+                        <MeetingItem key={user.title} user={user} setLst={props.setUsersList} lst={props.usersList} source={props.source}/>
                     ))
                 }
             </ul>

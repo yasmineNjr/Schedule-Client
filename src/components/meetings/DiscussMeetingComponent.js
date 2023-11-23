@@ -18,6 +18,7 @@ function DiscussMeetingComponent() {
     let { globalMessage, globalName } = value.state;
     
     const [message, setMessage] = useState([]);
+    const [selectedUser, setSelectedUser] = useState();
     const [selectedUsers, setSelectedUsers] = useState([]);
     
     useEffect(() => {
@@ -33,24 +34,53 @@ function DiscussMeetingComponent() {
 
     const handleSelected = (meet) => {
         let Meetings = selectedUsers;
-        Meetings.push(meet);
-        setSelectedUsers(Meetings);
         let global = globalMessage;
-        global.map(m => 
-          {
-            if(m === meet){
-              let str ;
-              if(m.selectedPersons.length === 0){
-                str = ': ';
-              }else{
-                str = ' - ';
+        
+        if(!Meetings.some(m => m.title === meet.title)){
+          console.log('if');
+          setSelectedUser(meet);
+          Meetings.push(meet);
+          setSelectedUsers(Meetings);
+          global.map(m => 
+            {
+              if(m === meet){
+                let str ;
+                if(m.selectedPersons.length === 0){
+                  console.log('inner if');
+                  str = ': ';
+                }else{
+                  console.log('inner else');
+                  str = ' - ';
+                }
+                str += globalName;
+                m.selectedPersons += str;
               }
-              str += globalName;
-              m.selectedPersons += str;
             }
-          }
-        );
+          );
+        }else{
+          console.log('else');
+          setSelectedUser();
+          Meetings.pop(meet);
+          setSelectedUsers(Meetings);
+          global.map(m => 
+            {
+              if(m === meet){
+                let str ;
+                if(m.selectedPersons.length === 2){
+                  console.log('2');
+                  str = ': ' + globalName;
+                  m.selectedPersons.replace( str , "");
+                }if(m.selectedPersons.length > 2){
+                  console.log('more 2');
+                  str = ' - ' + globalName;
+                  m.selectedPersons.replace( str , "");
+                }
+              }
+            }
+          );
+        }
         setMessage(global);
+        value.setGlobalMessage(global);
 	};
 
     return (
@@ -59,7 +89,7 @@ function DiscussMeetingComponent() {
           <strong className={classes.strong}>Plan a Meeting</strong>
           <p>{globalMessage[0].mainTitle}</p>
           <p>{globalMessage[0].description}</p>
-          <MeetingList users={selectedUsers}/>
+          <MeetingList usersList={selectedUsers} setUsersList={setSelectedUsers} source='discuss'/>
           <hr/>
           <Button title='Send' color='#512E5F' onClick={sendMessage} />
         </div>

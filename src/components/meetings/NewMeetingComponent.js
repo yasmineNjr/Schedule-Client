@@ -74,8 +74,13 @@ function NewMeetingComponent() {
 	const addPersonHandler = (event) => {
 		event.preventDefault();
 		let p = persons;
-		p.push(person);
-		setPersons(p);
+		if(!p.some(per => per.title === person.title)){
+			console.log('m');
+			p.push(person);
+			console.log(p);
+			setPersons(p);
+		}
+		setPerson({ title: ""});
 	}
 	  useEffect(() => {
 		socket.on("receive_message", (data) => {
@@ -102,7 +107,7 @@ function NewMeetingComponent() {
 		all.push(newSuggustion);
 		setAllSuggestions(all);
 		setMessage(all);
-		console.log(message);
+		setNewSuggestion({ ...newSuggustion, title: "", start: "", end: ""});
 	}
 	const handleSelected = (meet) => {
 		let lst = [];
@@ -192,7 +197,7 @@ function NewMeetingComponent() {
 
 					<Input type="text" placeholder="Person..." value={person.title} onChange={(e) => {e.preventDefault(); setPerson({title: e.target.value });}}/>
 					<Button title='Add Person' color='#D4AC0D' onClick={addPersonHandler} />
-					<MeetingList users={persons}/>
+					<MeetingList usersList={persons} setUsersList={setPersons} source='new'/>
 					<hr className={classes.hr}/>
 
 					<Input type="text" placeholder="Code..." readonly="readonly" value={code}/>
