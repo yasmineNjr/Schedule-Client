@@ -27,8 +27,8 @@ import Button from "../Layouts/Button";
 import CalendarComponent from "../Layouts/CalendarComponent";
 import {gapiLoaded, gisLoaded, handleAuthClick} from '../../GoogleCalendarHelper';
 
-// const socket = io.connect("http://localhost:3001");
-const socket = io.connect("https://schedule-a-meeting-server.onrender.com");
+const socket = io.connect("http://localhost:3001");
+// const socket = io.connect("https://schedule-a-meeting-server.onrender.com");
 
 function NewMeetingComponent() {
 	
