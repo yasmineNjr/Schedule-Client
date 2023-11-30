@@ -6,6 +6,7 @@ import AllMeetings from './pages/AllMeetings';
 import NewMeeting from './pages/NewMeeting';
 import DiscussMeeting from './pages/DiscussMeeting';
 import LogIn from './pages/LogIn';
+import GoogleCalendar from './pages/GoogleCalendar';
 import Layout from './components/Layout';
 import AppContext from './AppContext';
 
@@ -40,6 +41,7 @@ function App() {
                 {/* <Route exact path="/DiscussMeeting/:message" element={<DiscussMeeting/>} /> */}
                 <Route exact path="/DiscussMeeting" element={<DiscussMeeting/>} />
                 <Route exact path="/LogIn" element={<LogIn/>} />
+                <Route exact path="/GoogleCalendar" element={<GoogleCalendar/>} />
               </Routes>
             </Layout>
           </AppContext.Provider>

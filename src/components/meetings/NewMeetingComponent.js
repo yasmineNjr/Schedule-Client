@@ -1,3 +1,5 @@
+import {useNavigate} from 'react-router-dom';
+
 import React, { useState, useEffect } from "react";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import classes from './NewMeetingComponent.module.css';
@@ -22,8 +24,8 @@ import { useContext } from "react";
 import AppContext from '../../AppContext';
 import Input from "../Layouts/Input";
 import Button from "../Layouts/Button";
-import addCalendarEvent from '../../GoogleCalendar';
 import CalendarComponent from "../Layouts/CalendarComponent";
+import {gapiLoaded, gisLoaded, handleAuthClick} from '../../GoogleCalendarHelper';
 
 // const socket = io.connect("http://localhost:3001");
 const socket = io.connect("https://schedule-a-meeting-server.onrender.com");
@@ -31,8 +33,9 @@ const socket = io.connect("https://schedule-a-meeting-server.onrender.com");
 function NewMeetingComponent() {
 	
 	const value = useContext(AppContext);
-    let { globalMessage, globalName } = value.state;
-	
+    let { globalMessage, globalName, globalGmail } = value.state;
+	// const navigate = useNavigate();
+
 	const [newSuggustion, setNewSuggestion] = useState({ mainTitle: "", description: "", title: "", start: "", end: "", code: "", owner: "", persons: [], selectedPersons: '' });
     const [allSuggestion, setAllSuggestions] = useState([]);
 	const [code, setCode] = useState('Code...');
@@ -126,8 +129,42 @@ function NewMeetingComponent() {
 		return result;
 	}
 	function googleCalendarHandler() {
-		addCalendarEvent('2023-06-28T09:00:00-07:00', 'address', 'clientName');
+		const date = new Date();
+		const dateAsString = date.toString();
+		const timeZone = dateAsString.match(/\(([^\)]+)\)$/)[1];
+		// let x = finalMessage[0].end.toISOString();
+		// console.log(finalMessage[0].end.format("YYYY-MM-DD hh:mm:ss A Z"));
+		// console.log(finalMessage[0].end.toISOString());
 		
+		// var startDate = new Date(finalMessage[0].start);
+		// var startMinutes = startDate.getMinutes();
+		// if(startMinutes.toString().length===1) startMinutes = '0'+ startMinutes;
+		// var startHours = startDate.getHours();
+		// if(startHours.toString().length<2) startHours = '0'+ startHours;
+		// var endDate = new Date(finalMessage[0].end);
+		// var endMinutes = endDate.getMinutes();
+		// if(endMinutes.toString().length===1) endMinutes = '0'+ endMinutes;
+		// var endHours = endDate.getHours();
+		// if(endHours.toString().length<2) endHours = '0'+ endHours;
+		
+		// console.log('2023-11-20T09:00:00-07:00');
+		// const start = finalMessage[0].start.split('T')[0] + 'T' + startHours + ':' + startMinutes + ':00-07:00';
+		// const end = finalMessage[0].end.split('T')[0] + 'T' + endHours + ':' + endMinutes + ':00-07:00';
+		// console.log(start);
+		// console.log(end);
+
+		// let startDateTime = new Date("2023-11-28T09:00:00-07:00");
+		// let endDateTime = new Date("2023-11-28T17:00:00-07:00");
+		gapiLoaded();
+		gisLoaded();
+		handleAuthClick(finalMessage[0].mainTitle, 
+						"800 Howard St., San Francisco, CAAAA 94103",
+						finalMessage[0].description, 
+						finalMessage[0].start, 
+						finalMessage[0].end, 
+						timeZone, 
+						globalGmail);
+		// navigate('/GoogleCalendar');
 	}
 	return(  
 		<div>
@@ -204,9 +241,14 @@ function NewMeetingComponent() {
 					<Button title='Generate Code & Send' color='#512E5F' onClick={sendMessage} />
 					<hr className={classes.hr}/>
 
-					<Button title='Determine Final Date' color='#D35400' onClick={sendFinalMessage}/>
+					<Button title='Determine Final Date' color='#810541' onClick={sendFinalMessage}/>
 
-					<Button title='Google Calendar' color='#D35400' onClick={googleCalendarHandler}/>
+					{finalMessage.length !== 0
+						?
+						<Button title='Google Calendar' color='#D35400' onClick={googleCalendarHandler}/>
+						:
+						<div/>
+					}
 				</div>
 					<CalendarComponent events={message} onSelectEvent={handleSelected} source='new'/>
 			</div> 

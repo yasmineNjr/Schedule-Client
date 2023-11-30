@@ -1,7 +1,7 @@
 import {AiFillDelete} from 'react-icons/ai';
 import classes from './MeetingItem.module.css';
 function MeetingItem(props) {
-    
+   
     function onClickHandler(){
         const usersLst = props.lst.filter(u => u.title !== props.user.title);
         props.setLst(usersLst);
@@ -14,13 +14,19 @@ function MeetingItem(props) {
                 {
                     props.source !== 'discuss' 
                     ?
-                    <AiFillDelete style={{padding: '0.5rem', color: '#D35400'}} onClick={onClickHandler}/>
+                    <AiFillDelete style={{padding: '0.5rem', color: '#810541'}} onClick={onClickHandler}/>
                     :
                     <div></div>
                 }
                 
             </div>
-            <hr style={{width: '100%'}} />
+            {
+                props.lst[props.lst.length-1].title !== props.user.title
+                ?
+                <hr style={{width: '100%'}} />
+                :
+                <div/>
+            }
         </li>
     )
 }
