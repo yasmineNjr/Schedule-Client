@@ -8,8 +8,8 @@ import AppContext from '../../AppContext';
 import Button from '../Layouts/Button';
 import Input from '../Layouts/Input';
 
-const socket = io.connect("http://localhost:3001");
-// const socket = io.connect("https://schedule-a-meeting-server.onrender.com");
+// const socket = io.connect("http://localhost:3001");
+const socket = io.connect("https://schedule-a-meeting-server.onrender.com");
 
 function HomeComponent() {
 

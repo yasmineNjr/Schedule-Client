@@ -9,8 +9,8 @@ import MeetingList from "../Layouts/MeetingsList";
 import Button from "../Layouts/Button";
 import CalendarComponent from '../Layouts/CalendarComponent';
 
-const socket = io.connect("http://localhost:3001");
-// const socket = io.connect("https://schedule-a-meeting-server.onrender.com");
+// const socket = io.connect("http://localhost:3001");
+const socket = io.connect("https://schedule-a-meeting-server.onrender.com");
 
 function DiscussMeetingComponent() {
 

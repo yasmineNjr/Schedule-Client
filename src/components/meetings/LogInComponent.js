@@ -15,6 +15,7 @@ function LogInComponent() {
 
     function loginHandler(event) {
         event.preventDefault();
+        ///f(!enteredEmail)
         value.setGlobalName(enteredName);
         value.setGlobalGmail(enteredEmail);
         localStorage.setItem('Name', enteredName);
