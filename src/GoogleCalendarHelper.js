@@ -1,12 +1,12 @@
 import { gapi } from "gapi-script"
 
-const CLIENT_ID = process.env.CLIENT_ID ;
-//const CLIENT_ID = '241424108889-do9ei692opa6qr6vf58f0jjcmduttov4.apps.googleusercontent.com';
+// const CLIENT_ID = process.env.CLIENT_ID ;
+const CLIENT_ID = '241424108889-do9ei692opa6qr6vf58f0jjcmduttov4.apps.googleusercontent.com';
 let API_KEY = "";
-const DISCOVERY_DOC = process.env.DISCOVERY_DOC ;
-//const DISCOVERY_DOC = 'https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest';
-const SCOPES = process.env.SCOPES ;
-//const SCOPES = 'https://www.googleapis.com/auth/calendar';
+// const DISCOVERY_DOC = process.env.DISCOVERY_DOC ;
+const DISCOVERY_DOC = 'https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest';
+// const SCOPES = process.env.SCOPES ;
+const SCOPES = 'https://www.googleapis.com/auth/calendar';
 
 let tokenClient;
 let gapiInited = false
