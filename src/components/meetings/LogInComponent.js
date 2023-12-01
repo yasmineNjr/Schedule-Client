@@ -15,12 +15,16 @@ function LogInComponent() {
 
     function loginHandler(event) {
         event.preventDefault();
-        ///f(!enteredEmail)
-        value.setGlobalName(enteredName);
-        value.setGlobalGmail(enteredEmail);
-        localStorage.setItem('Name', enteredName);
-        localStorage.setItem('Email', enteredEmail);
-        setResult('You loged in') ;
+        if(!enteredEmail.includes('@gmail')){
+            setResult('Check your gmail') ;
+        }else{
+            value.setGlobalName(enteredName);
+            value.setGlobalGmail(enteredEmail);
+            localStorage.setItem('Name', enteredName);
+            localStorage.setItem('Email', enteredEmail);
+            setResult('You loged in') ;
+        }
+        
     }
 
     return  (
