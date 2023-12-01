@@ -51,7 +51,7 @@ async function initializeGapiClient() {
         window.open(event.htmlLink);
       })
     } catch (err) {
-      console.log('err');
+      console.log(err);
       return
     }
   }
