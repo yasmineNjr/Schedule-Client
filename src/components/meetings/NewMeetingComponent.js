@@ -87,11 +87,17 @@ function NewMeetingComponent() {
 	}
 	  useEffect(() => {
 		socket.on("receive_message", (data) => {
-		  setMessage(data.message);
-		  value.setGlobalMessage(data.message);
+			if(data.message[0].owner === globalName)
+			{
+				setMessage(data.message);
+				value.setGlobalMessage(data.message);
+			}
 		});
 		socket.on("receive_final", (data) => {
-			value.setFinalMessage(data.finalMessage);
+			// if(data.finalMessage.owner === globalName)
+			// {
+				value.setFinalMessage(data.finalMessage);
+			// }
 		  });
 	  }, [socket, value]);
 	

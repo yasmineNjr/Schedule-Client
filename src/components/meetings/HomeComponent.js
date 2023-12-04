@@ -58,7 +58,7 @@ function HomeComponent() {
 	return <section className={classes.maincontainer}>
 			<div className={classes.maindiv}>
 				<h3 className={classes.h3}>
-                The Meeting Planning App is an application that allows users to determine meeting times together with all users who will attend the meeting.
+                A meeting planning app allows a group of people to discuss and agree on a meeting date.
 				</h3>
 				<div className={classes.innerdiv}>
 					<div className={classes.inputdiv}>
