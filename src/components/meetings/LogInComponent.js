@@ -38,6 +38,7 @@ function LogInComponent() {
                         id='email' 
                         required 
                         value={enteredEmail} 
+                        width= '20rem'
                         onChange={event => setEnteredEmail(event.target.value)} />
                 </div>
                 <div className={classes.inputdiv}>
@@ -48,7 +49,8 @@ function LogInComponent() {
                             id='name' 
                             required
                             value={enteredName} 
-                             onChange={event => setEnteredName(event.target.value)} />
+                            width= '20rem'
+                            onChange={event => setEnteredName(event.target.value)} />
                 </div>
                 <div className={classes.btndiv} >
                     <Button title='Log In' color='#512E5F' width='21.5rem' onClick={loginHandler}/>

@@ -138,7 +138,7 @@ function GoogleCalendar() {
         }
     
         const events = response.result.items
-        if (!events || events.length == 0) {
+        if (!events || events.length === 0) {
         //   document.getElementById("content").innerText = "No events found."
           console.log('No events found.');
           return

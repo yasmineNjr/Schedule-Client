@@ -117,6 +117,28 @@ function NewMeetingComponent() {
 		lst.push(meet);
 		setFinalMessage(lst);
 	};
+	const keyPressed = (meet) => {
+		const keyDownHandler = event => {
+			if (event.key === 'D' || event.key === 'd') {
+			  event.preventDefault();
+	  
+			  // 👇️ your logic here
+			  console.log('key');
+			}
+		  };
+		  document.addEventListener('keydown', keyDownHandler);
+	  
+		  return () => {
+			document.removeEventListener('keydown', keyDownHandler);
+		  };
+	}
+	const doubleClick = (meet) => {
+		// let lst = allSuggestion;
+		// lst = lst.filter((item) => item.title !== meet.title);
+		// setAllSuggestions(lst);
+		// setMessage(lst);
+		console.log('double');
+	}
 	function generateCode() {
 		let result = '';
 		const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -241,8 +263,12 @@ function NewMeetingComponent() {
 					<Button title='Generate Code & Send' color='#512E5F' onClick={sendMessage} />
 					<hr className={classes.hr}/>
 
-					<Button title='Determine Final Date' color='#810541' onClick={sendFinalMessage}/>
-
+					{finalMessage.length !== 0
+						?
+						<Button title='Determine Final Date' color='#810541' onClick={sendFinalMessage}/>
+						:
+						<div/>
+					}
 					{finalMessage.length !== 0
 						?
 						<Button title='Google Calendar' color='#D35400' onClick={googleCalendarHandler}/>
@@ -250,7 +276,12 @@ function NewMeetingComponent() {
 						<div/>
 					}
 				</div>
-					<CalendarComponent events={message} onSelectEvent={handleSelected} source='new'/>
+					<CalendarComponent  events={message} 
+										onSelectEvent={handleSelected} 
+										onKeyPressEvent={keyPressed}
+										onDoubleClickEvent={doubleClick}
+										source='new'
+					/>
 			</div> 
 		}
 		</div>
