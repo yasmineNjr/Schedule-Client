@@ -22,7 +22,7 @@ function LogInComponent() {
             value.setGlobalGmail(enteredEmail);
             localStorage.setItem('Name', enteredName);
             localStorage.setItem('Email', enteredEmail);
-            setResult('You loged in') ;
+            setResult('You logged in') ;
         }
         
     }
@@ -32,7 +32,7 @@ function LogInComponent() {
             <div className={classes.subdiv}>
                 <div className={classes.inputdiv}>
                     <label className={classes.lbl} htmlFor='email'>
-                        <strong className={classes.str} >YOUR MAIL</strong>
+                        <strong className={classes.str} >EMAIL</strong>
                     </label>
                     <Input type='email' 
                         id='email' 
@@ -43,7 +43,7 @@ function LogInComponent() {
                 </div>
                 <div className={classes.inputdiv}>
                     <label className={classes.lbl} htmlFor='name'>
-                        <strong className={classes.str} >YOUR NAME</strong>
+                        <strong className={classes.str} >NAME</strong>
                     </label>
                     <Input type='text' 
                             id='name' 
@@ -53,7 +53,7 @@ function LogInComponent() {
                             onChange={event => setEnteredName(event.target.value)} />
                 </div>
                 <div className={classes.btndiv} >
-                    <Button title='Log In' color='#512E5F' width='21.5rem' onClick={loginHandler}/>
+                    <Button title='Log In' color='#512E5F' width='20rem' onClick={loginHandler}/>
                 </div>
                 <div className={classes.btndiv} >
                     <strong className={classes.result}>{result}</strong>

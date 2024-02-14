@@ -18,7 +18,7 @@ function App() {
   const [globalGmail, setGlobalGmail] = useState('');
 
   return (
-     <BrowserRouter>
+     <BrowserRouter >
         <AppContext.Provider
             value={{
               state: {

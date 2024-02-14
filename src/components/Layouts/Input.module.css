@@ -2,13 +2,13 @@
   font: inherit ; 
   border-radius: 6px; 
   border: 1px solid gray; 
-  margin-bottom: 0.25rem;
+  margin-bottom: 0.35rem;
   padding: 5px;
   color: #1B4F72;
   outline: none;
 }
 .input:focus {
-    outline: none; 
-    border:1px solid #1B4F72;
-    box-shadow: 0 0 10px #719ECE;
-  }
+  outline: none; 
+  border:1px solid #1B4F72;
+  box-shadow: 0 0 10px #719ECE;
+}

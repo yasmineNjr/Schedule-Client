@@ -42,7 +42,7 @@ function CalendarComponent(props){
 				onSelectEvent={props.onSelectEvent}
 				onKeyPressEvent={props.onKeyPressEvent}
 				onDoubleClickEvent={props.onDoubleClickEvent}
-				style={{ height: 500, backgroundColor: 'white', width: '90%', margin: '2rem' }} 
+				style={{ height: 455, backgroundColor: 'white', width: '96%', margin: '1rem' }} //70vw
 			/>
     );
 }

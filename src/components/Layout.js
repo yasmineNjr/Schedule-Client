@@ -1,14 +1,19 @@
 import { Fragment } from "react";
 import MainNavigation from "./MainNavigation";
+import classes from './Layout.module.css';
 
 function Layout(props){
     
     return (
-        <Fragment >
-            <MainNavigation/>
-            <main style={{backgroundColor: '#FBFCFC'}}>{props.children}</main>
-        </Fragment>
+        // <Fragment >
+        <div style={{width: '100%', height: '100%'}}>
+            <MainNavigation />
+            <main style={{ width: '100%', height: '100%'}}>{props.children}</main>
+        </div>
+        // </Fragment>
     );
 }
 
 export default Layout;
+
+// '#FBFCFC'

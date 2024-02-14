@@ -27,8 +27,8 @@ import Button from "../Layouts/Button";
 import CalendarComponent from "../Layouts/CalendarComponent";
 import {gapiLoaded, gisLoaded, handleAuthClick} from '../../GoogleCalendarHelper';
 
-// const socket = io.connect("http://localhost:3001");
-const socket = io.connect("https://schedule-a-meeting-server.onrender.com");
+const socket = io.connect("http://localhost:3001");
+// const socket = io.connect("https://schedule-a-meeting-server.onrender.com");
 
 function NewMeetingComponent() {
 	
@@ -36,7 +36,7 @@ function NewMeetingComponent() {
     let { globalMessage, globalName, globalGmail } = value.state;
 	// const navigate = useNavigate();
 
-	const [newSuggustion, setNewSuggestion] = useState({ mainTitle: "", description: "", title: "", start: "", end: "", code: "", owner: "", persons: [], selectedPersons: '' });
+	const [newSuggustion, setNewSuggestion] = useState({ mainTitle: "", description: "", title: "", start: "", end: "", code: "", owner: "", persons: [], selectedPersons: '', isCompleted: 'false'});
     const [allSuggestion, setAllSuggestions] = useState([]);
 	const [code, setCode] = useState('Code...');
 	const [message, setMessage] = useState([]);
@@ -44,6 +44,8 @@ function NewMeetingComponent() {
 	const [persons, setPersons] = useState([]);
 	const [person, setPerson] = useState({ title: ""});
 	// const [startTime, setStartTime] = useState(new Date());
+	const [selectedMeet, setSelectedMeet] = useState({});
+
 	// const [endTime, setEndTime] = useState('10:00');
 	// const onChangeStartTime = (value) => {
     //     setStartTime(value);
@@ -67,25 +69,37 @@ function NewMeetingComponent() {
 		}
 		//socket.emit("send_message", { message, code });
 		socket.emit("send_message", { message });
-		console.log(message);
+		// console.log(message);
 	  };
 	const sendFinalMessage = () => {
+		let msg = message;
+		msg.map(m => {if(m.title === selectedMeet.title) m.isCompleted = 'true'});
+		setMessage(msg);
+		sendMessage();
 		socket.emit("send_final", { finalMessage });
 		value.setFinalMessage(finalMessage);
-		localStorage.setItem('finalMessage',JSON.stringify(finalMessage));
+		///////////////
+		let lst = [];
+		// localStorage.clear();
+		lst =  JSON.parse(localStorage.getItem("finalMessage") || "[]");
+		console.log(lst);
+		let storedlst = [];
+		lst.map(l => storedlst.push(l));
+		finalMessage.map(f => storedlst.push(f));
+		console.log(storedlst);
+		localStorage.setItem('finalMessage',JSON.stringify(storedlst));
+		///////////////
 	};
 	const addPersonHandler = (event) => {
 		event.preventDefault();
 		let p = persons;
 		if(!p.some(per => per.title === person.title)){
-			console.log('m');
 			p.push(person);
-			console.log(p);
 			setPersons(p);
 		}
 		setPerson({ title: ""});
 	}
-	  useEffect(() => {
+	useEffect(() => {
 		socket.on("receive_message", (data) => {
 			if(data.message[0].owner === globalName)
 			{
@@ -119,9 +133,18 @@ function NewMeetingComponent() {
 		setNewSuggestion({ ...newSuggustion, title: "", start: "", end: ""});
 	}
 	const handleSelected = (meet) => {
-		let lst = [];
-		lst.push(meet);
-		setFinalMessage(lst);
+		setSelectedMeet(meet);
+		if(meet.code !== ''){
+			let lst = [];
+			lst.push(meet);
+			setFinalMessage(lst);
+		}else{
+			let all = allSuggestion;
+			all = all.filter(a => a.title !== meet.title);
+			setAllSuggestions(all);
+			setMessage(all);
+			// console.log(all)
+		}
 	};
 	const keyPressed = (meet) => {
 		const keyDownHandler = event => {
@@ -208,11 +231,11 @@ function NewMeetingComponent() {
 					<strong className={classes.strong}>Meeting Information</strong>
 					<hr/>
 					
-					<Input type="text" placeholder="Title..." value={newSuggustion.mainTitle} onChange={(e) => setNewSuggestion({ ...newSuggustion, mainTitle: e.target.value })}/>
-					<Input type="description" placeholder="Description..."  value={newSuggustion.description} onChange={(e) => setNewSuggestion({ ...newSuggustion, description: e.target.value })} />
+					<Input type="text" placeholder="Title..." width='94%' value={newSuggustion.mainTitle} onChange={(e) => setNewSuggestion({ ...newSuggustion, mainTitle: e.target.value })}/>
+					<Input type="description" placeholder="Description..." width='94%' value={newSuggustion.description} onChange={(e) => setNewSuggestion({ ...newSuggustion, description: e.target.value })} />
 					<hr className={classes.hr}/>
 					
-					<Input type="text" placeholder="Suggestion..."  value={newSuggustion.title} onChange={(e) => setNewSuggestion({ ...newSuggustion, title: e.target.value })} />
+					<Input type="text" placeholder="Suggestion..." width='94%' value={newSuggustion.title} onChange={(e) => setNewSuggestion({ ...newSuggustion, title: e.target.value })} />
 					{/* <div style={{marginBottom: '0.25rem'}} >
 						<DatePicker placeholderText="Start Date..." selected={newSuggustion.start} onChange={(start) => setNewSuggestion({ ...newSuggustion, start })} />
 					</div>
@@ -244,7 +267,7 @@ function NewMeetingComponent() {
 							format={"yyyy-MM-dd hh:mm a"}
 							onChange={(start) => setNewSuggestion({ ...newSuggustion, start })}
 							value={newSuggustion.start}
-							width={250}
+							width={300}
 						/>
 					</div>
 					<div className={classes.pickerdiv} >
@@ -253,41 +276,49 @@ function NewMeetingComponent() {
 							format={"yyyy-MM-dd hh:mm a"}
 							onChange={(end) => setNewSuggestion({ ...newSuggustion, end })}
 							value={newSuggustion.end}
-							width={250}
+							width='20rem'
 							
 						/>
 					</div>
-					<Button title='Add Suggestion' color='#D4AC0D' onClick={handleAddSuggestion} />
+					<Button title='Add Suggestion' color='#D4AC0D' width='98%' onClick={handleAddSuggestion} />
 					<hr className={classes.hr}/>
 
-					<Input type="text" placeholder="Person..." value={person.title} onChange={(e) => {e.preventDefault(); setPerson({title: e.target.value });}}/>
-					<Button title='Add Person' color='#D4AC0D' onClick={addPersonHandler} />
+					<Input type="text" placeholder="Person..." width='94%' value={person.title} onChange={(e) => {e.preventDefault(); setPerson({title: e.target.value });}}/>
+					<Button title='Add Person' color='#D4AC0D' width='98%' onClick={addPersonHandler} />
 					<MeetingList usersList={persons} setUsersList={setPersons} source='new'/>
 					<hr className={classes.hr}/>
 
-					<Input type="text" placeholder="Code..." readonly="readonly" value={code}/>
-					<Button title='Generate Code & Send' color='#512E5F' onClick={sendMessage} />
+					<Input type="text" placeholder="Code..." width='94%' readonly="readonly" value={code}/>
+					<Button title='Generate Code & Send' color='#512E5F' width='98%' onClick={sendMessage} />
 					<hr className={classes.hr}/>
 
-					{finalMessage.length !== 0
-						?
-						<Button title='Determine Final Date' color='#810541' onClick={sendFinalMessage}/>
-						:
-						<div/>
-					}
-					{finalMessage.length !== 0
-						?
-						<Button title='Google Calendar' color='#D35400' onClick={googleCalendarHandler}/>
-						:
-						<div/>
-					}
 				</div>
+				<div style={{width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center'}}>
 					<CalendarComponent  events={message} 
 										onSelectEvent={handleSelected} 
 										onKeyPressEvent={keyPressed}
 										onDoubleClickEvent={doubleClick}
 										source='new'
 					/>
+					<div style={{width: '100%',display: 'flex', flexDirection: 'row'}}>
+						{finalMessage.length !== 0
+							?
+							<div style={{display: 'flex', alignItems: 'center', justifyContent: 'center', width: '50%', marginLeft: '1rem', marginRight: '1rem'}}>
+								<Button title='Determine Final Date' color='#810541' width='100%' onClick={sendFinalMessage}/>
+							</div>
+							:
+							<div/>
+						}
+						{finalMessage.length !== 0
+							?
+							<div style={{display: 'flex', alignItems: 'center', justifyContent: 'center', width: '50%', marginLeft: '1rem', marginRight: '1rem'}}>
+								<Button title='Google Calendar' color='#D35400' width='100%' onClick={googleCalendarHandler}/>
+							</div>
+							:
+							<div/>
+						}
+					</div>
+				</div>
 			</div> 
 		}
 		</div>

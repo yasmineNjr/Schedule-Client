@@ -8,11 +8,11 @@ import AppContext from '../../AppContext';
 import Button from '../Layouts/Button';
 import Input from '../Layouts/Input';
 
-// const socket = io.connect("http://localhost:3001");
-const socket = io.connect("https://schedule-a-meeting-server.onrender.com");
+const socket = io.connect("http://localhost:3001");
+// const socket = io.connect("https://schedule-a-meeting-server.onrender.com");
 
 function HomeComponent() {
-
+	
 	const value = useContext(AppContext);
 	let { globalMessage, globalName } = value.state;
 
@@ -55,23 +55,41 @@ function HomeComponent() {
 		}
 	  }
 
-	return <section className={classes.maincontainer}>
-			<div className={classes.maindiv}>
-				<h3 className={classes.h3}>
-                A meeting planning app allows a group of people to discuss and agree on a meeting date.
-				</h3>
-				<div className={classes.innerdiv}>
-					<div className={classes.inputdiv}>
-						<Input type="text" placeholder="Code..." value={code} onChange={(event) => setCode(event.target.value)}/>
+	return (
+		<div  style={{ width: '100%',
+			height: '100%', 
+			backgroundColor: 'red', 
+			backgroundImage: 'linear-gradient(rgba(255,255,255,0.22), rgba(255,255,255,0.22)),url("/images/logo3.jpg")',
+			backgroundPosition: 'center', /* Center the image */
+			backgroundRepeat: 'no-repeat', /* Do not repeat the image */
+			backgroundSize: 'cover', /* Resize the background image to cover the entire container */
+			position:'relative',
+			float:'left',
+			color:'white',
+			overflow:'hidden',
+			// transform: 'translateZ(-10rem)',
+			// zIndex: '100',
+		}}>
+			<section className={classes.maincontainer} >
+				<div className={classes.maindiv}>
+					{/* <h1 className={classes.h1}>
+					A meeting planning app allows a group of people to discuss and agree on a meeting date
+					</h1> */}
+					<h1 className={classes.h3}>
+					Get code to join a meeting
+					</h1>
+					<div className={classes.innerdiv}>
+						<div className={classes.inputdiv}>
+							<Input type="text" placeholder="Code..." width= '10rem' height='2rem' value={code} onChange={(event) => setCode(event.target.value)}/>
+						</div>
+						<Button title='Join A Meeting' width='10rem' height='2.8rem' color='#D4AC0D' onClick={checkCodeHandler}  />
 					</div>
-					<Button title='Discuss a Meeting' color='#D4AC0D' onClick={checkCodeHandler}  />
+					<strong className={classes.strong}>{result}</strong>
 				</div>
-				<strong className={classes.strong}>{result}</strong>
-			</div>
-			<div className={classes.imgdiv}>
-                <img src='/images/logo3.jpg' alt='An image showing a meeting' height={547}/>
-			</div>
-		</section>
+			</section>
+		</div>
+	)
 }
 
 export default HomeComponent;
+///

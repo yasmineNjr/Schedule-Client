@@ -13,14 +13,15 @@
     background-color: #FBFCFC; 
     display: flex; 
     flex-direction: row; 
-    padding: 1rem;
+    padding: 0.5rem;
 }
 .entriesdiv { 
     display: flex; 
     flex-direction: column; 
-    width: 30%; 
+    width: 30vw; 
     margin-left: 0.5rem; 
     margin-right: 0.5rem; 
+    margin-top: 1rem;
     overflow: auto;
 }
 .hr { 
@@ -29,4 +30,33 @@
 }
 .pickerdiv {
     margin-bottom: 0.25rem;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0.35rem;
 }
+
+@media screen and (max-width : 540px) {
+    .maindiv {
+        background-color: #FBFCFC; 
+        display: flex; 
+        flex-direction: column; 
+        padding: 0.5rem;
+    }
+    .strong {
+        color: #1B4F72; 
+        font-size: 1rem
+    }
+    .entriesdiv { 
+        display: flex; 
+        flex-direction: column; 
+        width: 98%; 
+        align-items: center;
+        justify-content: center;
+        margin-left: 0.5rem; 
+        margin-right: 0.5rem; 
+        margin-top: 0.5rem;
+        overflow: auto;
+    }
+  }

@@ -8,7 +8,7 @@
     padding: 0;
   }
   .header h1 {
-    padding: 6rem;
+    padding: 5rem;
     color: #FFC300;
   }
   .header ul {
@@ -21,7 +21,7 @@
   
   .header li {
     margin: 0 ;
-    padding: 1rem;
+    padding: 2rem;
   }
   
   .header a {
@@ -35,9 +35,16 @@
     color: #FFC300;
   }
   
-  @media (min-width: 768px) {
-    .header ul {
-      gap: 0.5rem;
+  @media screen and (max-width : 540px) {
+    .header h1 {
+      padding: 2rem;
+      color: #FFC300;
+      font-size: 1.25rem;
     }
-  
+    
+    .header li {
+      margin: 0 ;
+      padding: 1rem;
+      font-size: 0.85rem;
+    }
   }

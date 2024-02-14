@@ -7,6 +7,9 @@ function EventComponent(props) {
 
     let session = props.title;
     let users = props.event.selectedPersons;
+    let isCompleted 
+    if(props.event.isCompleted === 'true') isCompleted = true;
+    else isCompleted = false;
     // if(props.source === 'all'){
     //     session = props.title.substring(0, props.title.indexOf(":"));
     //     console.log(session);
@@ -70,6 +73,7 @@ function EventComponent(props) {
 
     return(
         <div className={classes.maindiv}
+            style={isCompleted ? {color: '#810541'} :{color: 'white'} }
              onContextMenu={(e) => handleOnContextMenu(e, session)}
         >
             <p>{session}</p>
