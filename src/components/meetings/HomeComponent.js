@@ -56,40 +56,24 @@ function HomeComponent() {
 	  }
 
 	return (
-		<div  style={{ width: '100%',
-			height: '100%', 
-			backgroundColor: 'red', 
-			backgroundImage: 'linear-gradient(rgba(255,255,255,0.22), rgba(255,255,255,0.22)),url("/images/logo3.jpg")',
-			backgroundPosition: 'center', /* Center the image */
-			backgroundRepeat: 'no-repeat', /* Do not repeat the image */
-			backgroundSize: 'cover', /* Resize the background image to cover the entire container */
-			position:'relative',
-			float:'left',
-			color:'white',
-			overflow:'hidden',
-			// transform: 'translateZ(-10rem)',
-			// zIndex: '100',
-		}}>
-			<section className={classes.maincontainer} >
-				<div className={classes.maindiv}>
-					{/* <h1 className={classes.h1}>
-					A meeting planning app allows a group of people to discuss and agree on a meeting date
-					</h1> */}
-					<h1 className={classes.h3}>
-					Get code to join a meeting
-					</h1>
-					<div className={classes.innerdiv}>
-						<div className={classes.inputdiv}>
-							<Input type="text" placeholder="Code..." width= '10rem' height='2rem' value={code} onChange={(event) => setCode(event.target.value)}/>
-						</div>
-						<Button title='Join A Meeting' width='10rem' height='2.8rem' color='#D4AC0D' onClick={checkCodeHandler}  />
+		<div className={classes.background} style={{ backgroundImage: 'linear-gradient(rgba(255,255,255,0.22), rgba(255,255,255,0.22)),url("/images/logo3.jpg")'}}>
+			 <section className={classes.maincontainer} >
+			 	<div className={classes.maindiv}>
+			 		<h1 className={classes.h3}>Get code to join a meeting</h1>
+			 		<div className={classes.innerdiv}>
+			 			<div className={classes.inputdiv}>
+			 				<Input type="text" placeholder="Code..." width= '10rem' height='2rem' value={code} onChange={(event) => setCode(event.target.value)}/>
+			 			</div>
+			 			<Button title='Join A Meeting' width='10rem' height='2.8rem' color='#D4AC0D' onClick={checkCodeHandler}  />
+			 		</div>
+					<div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+						<strong className={classes.strong}>{result}</strong>
 					</div>
-					<strong className={classes.strong}>{result}</strong>
-				</div>
-			</section>
+			 	</div>
+			 </section>
 		</div>
 	)
 }
 
 export default HomeComponent;
-///
+			

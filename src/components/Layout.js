@@ -8,7 +8,7 @@ function Layout(props){
         // <Fragment >
         <div style={{width: '100%', height: '100%'}}>
             <MainNavigation />
-            <main style={{ width: '100%', height: '100%'}}>{props.children}</main>
+            <main style={{ width: '100%', height: '100%', marginTop: '6rem'}}>{props.children}</main>
         </div>
         // </Fragment>
     );
