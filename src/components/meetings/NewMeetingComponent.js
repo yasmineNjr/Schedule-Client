@@ -297,19 +297,19 @@ function NewMeetingComponent() {
 										onDoubleClickEvent={doubleClick}
 										source='new'
 					/>
-					<div style={{width: '100%',display: 'flex', flexDirection: 'row', height: '2rem'}}>
+					<div className={classes.resultdiv}>
 						{finalMessage.length !== 0
 							?
-							<div style={{display: 'flex', alignItems: 'center', justifyContent: 'center', width: '50%', marginLeft: '1rem', marginRight: '1rem'}}>
-								<Button title='Determine Final Date' color='#810541' width='75%' onClick={sendFinalMessage}/>
+							<div className={classes.btndiv}>
+								<Button title='Determine Final Date' color='#810541' width='94%' onClick={sendFinalMessage}/>
 							</div>
 							:
 							<div/>
 						}
 						{finalMessage.length !== 0
 							?
-							<div style={{display: 'flex', alignItems: 'center', justifyContent: 'center', width: '50%', marginLeft: '1rem', marginRight: '1rem'}}>
-								<Button title='Google Calendar' color='#D35400' width='75%' onClick={googleCalendarHandler}/>
+							<div className={classes.btndiv}>
+								<Button title='Google Calendar' color='#D35400' width='94%' onClick={googleCalendarHandler}/>
 							</div>
 							:
 							<div/>

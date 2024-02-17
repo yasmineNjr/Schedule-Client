@@ -17,13 +17,12 @@
 	overflow:hidden;
 }
 .maindiv {
-  margin-bottom: 8rem;
+  margin-bottom: 5rem;
   display:flex; 
   flex-direction: column; 
   justify-content: center;
   position: absolute;
   bottom: 0;
-  /* z-index: 100, */
 }
 .h1 {
   color: #21618C;
@@ -67,12 +66,11 @@
     overflow:hidden;
   }
   .maindiv {
-    margin-bottom: 18rem;
+    margin-bottom: 10rem;
     display:flex; 
     flex-direction: column; 
     justify-content: center;
     position: absolute;
     bottom: 0;
-    /* z-index: 100, */
   }
 }

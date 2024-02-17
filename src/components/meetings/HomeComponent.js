@@ -19,7 +19,7 @@ function HomeComponent() {
     const navigate = useNavigate();
 	
 	const [messageReceived, setMessageReceived] = useState("");
-	const [code, setCode] = useState('Code...');
+	const [code, setCode] = useState('');
 	const [result, setResult] = useState('');
 
 	  useEffect(() => {
@@ -66,7 +66,7 @@ function HomeComponent() {
 			 			</div>
 			 			<Button title='Join A Meeting' width='10rem' height='2.8rem' color='#D4AC0D' onClick={checkCodeHandler}  />
 			 		</div>
-					<div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+					<div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '2rem'}}>
 						<strong className={classes.strong}>{result}</strong>
 					</div>
 			 	</div>

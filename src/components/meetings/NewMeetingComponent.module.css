@@ -35,6 +35,20 @@
     display: flex;
     margin-bottom: 0.35rem;
 }
+.resultdiv {
+    width: 100%;
+    display: flex;
+    flex-direction: row; 
+    height: 2rem;
+}
+.btndiv {
+    display: flex; 
+    align-items: center;
+    justify-content: center; 
+    width: 50%; 
+    margin-left: 1rem; 
+    margin-right: 1rem;
+}
 
 @media screen and (max-width : 540px) {
     .maindiv {
@@ -65,5 +79,20 @@
         align-items: center;
         justify-content: center;
         margin-bottom: 0.35rem;
+    }
+    .resultdiv {
+        width: 100%;
+        display: flex;
+        flex-direction: column; 
+        height: 5rem;
+        margin-bottom: 1rem;
+        align-items: center;
+        justify-content: center;
+    }
+    .btndiv {
+        display: flex; 
+        align-items: center;
+        justify-content: center; 
+        width: 100%; 
     }
   }
