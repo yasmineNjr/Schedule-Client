@@ -56,7 +56,8 @@ function LogInComponent() {
                     <Button title='Log In' color='#512E5F' width='20rem' onClick={loginHandler}/>
                 </div>
                 <div className={classes.btndiv} >
-                    <strong className={classes.result} style={{backgroundColor: 'red'}}>
+                    <strong className={classes.result} 
+                            style={result === 'Check your gmail' ? {height: '2rem', color: '#D35400'} : {height: '2rem', color: '#1B4F72'}}>
                         {result}
                     </strong>
                 </div>

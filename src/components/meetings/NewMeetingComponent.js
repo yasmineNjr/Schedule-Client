@@ -1,5 +1,3 @@
-import {useNavigate} from 'react-router-dom';
-
 import React, { useState, useEffect } from "react";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import classes from './NewMeetingComponent.module.css';
@@ -267,7 +265,7 @@ function NewMeetingComponent() {
 							format={"yyyy-MM-dd hh:mm a"}
 							onChange={(start) => setNewSuggestion({ ...newSuggustion, start })}
 							value={newSuggustion.start}
-							width={300}
+							width={200}
 						/>
 					</div>
 					<div className={classes.pickerdiv} >
@@ -276,8 +274,7 @@ function NewMeetingComponent() {
 							format={"yyyy-MM-dd hh:mm a"}
 							onChange={(end) => setNewSuggestion({ ...newSuggustion, end })}
 							value={newSuggustion.end}
-							width='20rem'
-							
+							width={200}
 						/>
 					</div>
 					<Button title='Add Suggestion' color='#D4AC0D' width='98%' onClick={handleAddSuggestion} />
@@ -300,11 +297,11 @@ function NewMeetingComponent() {
 										onDoubleClickEvent={doubleClick}
 										source='new'
 					/>
-					<div style={{width: '100%',display: 'flex', flexDirection: 'row'}}>
+					<div style={{width: '100%',display: 'flex', flexDirection: 'row', height: '2rem'}}>
 						{finalMessage.length !== 0
 							?
 							<div style={{display: 'flex', alignItems: 'center', justifyContent: 'center', width: '50%', marginLeft: '1rem', marginRight: '1rem'}}>
-								<Button title='Determine Final Date' color='#810541' width='100%' onClick={sendFinalMessage}/>
+								<Button title='Determine Final Date' color='#810541' width='75%' onClick={sendFinalMessage}/>
 							</div>
 							:
 							<div/>
@@ -312,7 +309,7 @@ function NewMeetingComponent() {
 						{finalMessage.length !== 0
 							?
 							<div style={{display: 'flex', alignItems: 'center', justifyContent: 'center', width: '50%', marginLeft: '1rem', marginRight: '1rem'}}>
-								<Button title='Google Calendar' color='#D35400' width='100%' onClick={googleCalendarHandler}/>
+								<Button title='Google Calendar' color='#D35400' width='75%' onClick={googleCalendarHandler}/>
 							</div>
 							:
 							<div/>

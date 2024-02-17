@@ -22,19 +22,17 @@
     margin-left: 0.5rem; 
     margin-right: 0.5rem; 
     margin-top: 1rem;
-    overflow-y: scroll;
-    overflow-x:hidden;
+    /* overflow-y: scroll;
+    overflow-x:hidden; */
+    z-index: 5;
 }
 .hr { 
     color: black; 
     width: 98%;
 }
 .pickerdiv {
-    margin-bottom: 0.25rem;
-    width: 100%;
+    width: 75%;
     display: flex;
-    align-items: center;
-    justify-content: center;
     margin-bottom: 0.35rem;
 }
 
@@ -60,5 +58,12 @@
         margin-top: 0.5rem;
         overflow:scroll;
         overflow-x:hidden;
+    }
+    .pickerdiv {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 0.35rem;
     }
   }

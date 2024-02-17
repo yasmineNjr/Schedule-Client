@@ -115,10 +115,18 @@ function DiscussMeetingComponent() {
       <div className={classes.maindiv}>
         <div className={classes.div}>
           <strong className={classes.strong}>Plan a Meeting</strong>
-          <p>{globalMessage[0].mainTitle}</p>
-          <p>{globalMessage[0].description}</p>
-          <MeetingList usersList={selectedUsers} setUsersList={setSelectedUsers} source='discuss'/>
-          <hr/>
+          <div style={{marginBottom: '0.5rem', marginTop: '0.5rem'}}>
+            <div style={{color: '#1B4F72'}}>Title: </div>
+            <div>{globalMessage[0].mainTitle}</div>
+          </div>
+          <div style={{marginBottom: '0.5rem'}}>
+            <div style={{color: '#1B4F72'}}>Description: </div>
+            <div>{globalMessage[0].description}</div>
+          </div>
+          <div style={{marginBottom: '0.5rem', marginTop: '0.5rem'}}>
+            {selectedUsers.length > 0 ? <div style={{color: '#1B4F72'}}>Selected dates: </div> : <div/>}
+            <MeetingList usersList={selectedUsers} setUsersList={setSelectedUsers} source='discuss'/>
+          </div>
           {
             !globalMessage.some(g => g.isCompleted === 'true')
             ?

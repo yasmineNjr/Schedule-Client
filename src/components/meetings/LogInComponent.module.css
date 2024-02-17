@@ -3,7 +3,6 @@
     justify-content: center; 
     align-items: center;
     background-color: #FBFCFC; 
-    height: 800;
 }
 .subdiv {
     display: flex; 
@@ -13,7 +12,7 @@
     border-radius: 12px; 
     border: 2px solid #1B4F72; 
     width: 40rem; 
-    height: 15rem; 
+    height: 20rem; 
     margin-top: 3rem;
 }
 .inputdiv {
@@ -51,9 +50,9 @@
         justify-content: center;
         border-radius: 12px; 
         border: 2px solid #1B4F72; 
-        width: 22rem; 
+        width: 21rem; 
         height: 15rem; 
-        margin-top: 3rem;
+        margin-top: 5rem;
     }
     .inputdiv {
         display: flex; 
